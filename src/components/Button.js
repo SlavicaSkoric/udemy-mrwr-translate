@@ -1,5 +1,6 @@
 import React from 'react';
 import LanguageContext from '../contexts/LanguageContext';
+import ColorContext from '../contexts/ColorContext';
 
 class Button extends React.Component {
   //(1) this.context approach (1)
@@ -21,20 +22,29 @@ class Button extends React.Component {
 
   //(2) Consumer component approach (2)
 
-  renderSubmit(value) {
-    return value === 'english' ? 'Submit' : 'Voorleggen';
+  renderSubmit(language) {
+    return language === 'english' ? 'Submit' : 'Voorleggen';
   }
 
-  render() {
+  renderButton(color) {
     return (
-      <button className='ui button primary'>
+      <button className={`ui button ${color}`}>
         <LanguageContext.Consumer>
-          {(value) => this.renderSubmit(value)}
+          {({ language }) => this.renderSubmit(language)}
         </LanguageContext.Consumer>
       </button>
     );
   }
+
+  render() {
+    return (
+      <ColorContext.Consumer>
+        {(color) => this.renderButton(color)}
+      </ColorContext.Consumer>
+    );
+  }
   //we provide a function (a callback) as a child to a React component
+  //this function will be called with whatever value we provide inside ColorContext object
 }
 
 export default Button;
