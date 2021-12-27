@@ -33,4 +33,6 @@ class App extends React.Component {
   }
 }
 
+//value in the Provider will be used to update the context object
+
 export default App;
